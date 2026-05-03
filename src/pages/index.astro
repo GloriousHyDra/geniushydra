@@ -5,70 +5,79 @@ interface LinkItem {
 	name: string;
 	subtitle?: string;
 	url: string;
-	icon: string;
+	image: string;
+	fallbackIcon: string;
+	platform: 'discord' | 'telegram' | 'steam' | 'github';
 	color: string;
 	gradient?: string;
 }
 
 const links: LinkItem[] = [
 	{
-		name: 'Discord',
-		subtitle: 'My personal account',
+		name: 'Made in heaven',
+		subtitle: 'My Discord',
 		url: 'https://discord.com/users/geniushydra',
-		icon: 'discord',
+		image: '/icons/discord.png',
+		fallbackIcon: 'discord',
+		platform: 'discord',
 		color: '#5865F2',
-		gradient: 'linear-gradient(135deg, #5865F2, #7289DA)',
+		gradient: 'linear-gradient(135deg, #5865F2 0%, #8B95F8 100%)',
 	},
 	{
-		name: 'Discord Server',
-		subtitle: 'My discord server',
+		name: 'HyDra\'s Chill House',
+		subtitle: 'My Discord server',
 		url: 'https://discord.gg/mq5Tv7Q',
-		icon: 'discord',
+		image: '/icons/discord-server.png',
+		fallbackIcon: 'discord',
+		platform: 'discord',
 		color: '#5865F2',
-		gradient: 'linear-gradient(135deg, #7289DA, #99AAF5)',
+		gradient: 'linear-gradient(135deg, #7B68EE 0%, #9F8FFF 100%)',
 	},
 	{
-		name: 'Telegram',
-		subtitle: 'Message me',
+		name: 'GeniusHydra',
+		subtitle: 'My Telegram',
 		url: 'https://t.me/geniushydra',
-		icon: 'telegram',
+		image: '/icons/telegram.png',
+		fallbackIcon: 'telegram',
+		platform: 'telegram',
 		color: '#26A5E4',
-		gradient: 'linear-gradient(135deg, #0088CC, #26A5E4)',
+		gradient: 'linear-gradient(135deg, #0088CC 0%, #29B6F6 100%)',
 	},
 	{
-		name: 'Telegram Channel',
-		subtitle: 'My telegram channel',
+		name: 'Чиллхаус',
+		subtitle: 'My Telegram Channel',
 		url: 'https://t.me/hydrachillhouse',
-		icon: 'telegram',
+		image: '/icons/telegram-channel.png',
+		fallbackIcon: 'telegram',
+		platform: 'telegram',
 		color: '#26A5E4',
-		gradient: 'linear-gradient(135deg, #26A5E4, #6DD5FA)',
+		gradient: 'linear-gradient(135deg, #00BCD4 0%, #4FC3F7 100%)',
 	},
 	{
-		name: 'Steam',
-		subtitle: 'Play with me',
+		name: 'HyDra',
+		subtitle: 'My Steam',
 		url: 'https://steamcommunity.com/id/geniushydra/',
-		icon: 'steam',
+		image: '/icons/steam.png',
+		fallbackIcon: 'steam',
+		platform: 'steam',
 		color: '#1B2838',
-		gradient: 'linear-gradient(135deg, #1B2838, #2A475E)',
-	},
-	{
-		name: 'GitHub',
-		subtitle: 'My projects',
-		url: 'https://github.com/GloriousHyDra',
-		icon: 'github',
-		color: '#24292e',
-		gradient: 'linear-gradient(135deg, #24292e, #555)',
+		gradient: 'linear-gradient(135deg, #1E3C72 0%, #2A5298 100%)',
 	},
 ];
 ---
 
 <Layout>
 	<main>
-		<div class="glow glow-1"></div>
-		<div class="glow glow-2"></div>
+		<div class="aurora">
+			<div class="aurora-wave wave-1"></div>
+			<div class="aurora-wave wave-2"></div>
+			<div class="aurora-wave wave-3"></div>
+			<div class="aurora-wave wave-4"></div>
+		</div>
 
 		<div class="container">
 			<div class="avatar">
+				<img src="/icons/avatar.png" alt="GeniusHydra" class="avatar-image" onerror="this.dataset.failed='true'" />
 				<span class="avatar-text">G</span>
 			</div>
 			<h1>GeniusHydra</h1>
@@ -84,9 +93,15 @@ const links: LinkItem[] = [
 						style={`--accent: ${link.color}; --gradient: ${link.gradient}`}
 					>
 						<div class="link-icon-wrap">
-							<svg class="link-icon">
-								<use href={`#icon-${link.icon}`} />
+							<img src={link.image} alt={`${link.name} icon`} class="link-image" loading="lazy" onerror="this.dataset.failed='true'" />
+							<svg class="link-icon-fallback">
+								<use href={`#icon-${link.fallbackIcon}`} />
 							</svg>
+							<span class={`platform-badge platform-${link.platform}`} aria-label={link.platform}>
+								<svg viewBox="0 0 24 24">
+									<use href={`#icon-${link.platform}`} />
+								</svg>
+							</span>
 						</div>
 						<div class="link-text">
 							<span class="link-name">{link.name}</span>
@@ -133,37 +148,73 @@ const links: LinkItem[] = [
 		overflow: hidden;
 	}
 
-	/* Soft colorful background glows */
-	.glow {
+	/* Aurora wave background */
+	.aurora {
 		position: fixed;
-		border-radius: 50%;
-		filter: blur(100px);
-		opacity: 0.4;
+		inset: 0;
+		overflow: hidden;
 		pointer-events: none;
 		z-index: 0;
 	}
 
-	.glow-1 {
-		width: 500px;
-		height: 500px;
-		background: linear-gradient(135deg, #a78bfa, #818cf8);
-		top: -150px;
-		right: -100px;
-		animation: float 8s ease-in-out infinite;
+	.aurora-wave {
+		position: absolute;
+		width: 140%;
+		height: 60%;
+		filter: blur(80px);
+		opacity: 0.55;
+		mix-blend-mode: screen;
+		border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%;
 	}
 
-	.glow-2 {
-		width: 400px;
-		height: 400px;
-		background: linear-gradient(135deg, #38bdf8, #34d399);
-		bottom: -100px;
-		left: -100px;
-		animation: float 8s ease-in-out infinite reverse;
+	.wave-1 {
+		top: -15%;
+		left: -20%;
+		background: linear-gradient(120deg, #a78bfa 0%, #c084fc 50%, transparent 100%);
+		animation: wave-flow 14s ease-in-out infinite;
 	}
 
-	@keyframes float {
-		0%, 100% { transform: translate(0, 0); }
-		50% { transform: translate(30px, -30px); }
+	.wave-2 {
+		top: 10%;
+		right: -30%;
+		background: linear-gradient(240deg, #f0abfc 0%, #f472b6 50%, transparent 100%);
+		animation: wave-flow 18s ease-in-out infinite reverse;
+		animation-delay: -3s;
+	}
+
+	.wave-3 {
+		bottom: -10%;
+		left: -15%;
+		background: linear-gradient(60deg, #1e40af 0%, #2563eb 50%, transparent 100%);
+		animation: wave-flow 16s ease-in-out infinite;
+		animation-delay: -6s;
+	}
+
+	.wave-4 {
+		bottom: 15%;
+		right: -20%;
+		background: linear-gradient(300deg, #1d4ed8 0%, #3b82f6 50%, transparent 100%);
+		animation: wave-flow 20s ease-in-out infinite reverse;
+		animation-delay: -9s;
+	}
+
+	@keyframes wave-flow {
+		0%, 100% {
+			transform: translate(0, 0) rotate(0deg) scale(1);
+			border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%;
+		}
+		25% {
+			transform: translate(40px, -30px) rotate(90deg) scale(1.05);
+			border-radius: 55% 45% 60% 40% / 45% 55% 50% 50%;
+		}
+		50% {
+			transform: translate(-20px, 40px) rotate(180deg) scale(0.95);
+			border-radius: 50% 50% 45% 55% / 55% 45% 50% 50%;
+		}
+		75% {
+			transform: translate(30px, 20px) rotate(270deg) scale(1.02);
+			border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+		}
 	}
 
 	.container {
@@ -175,8 +226,8 @@ const links: LinkItem[] = [
 	}
 
 	.avatar {
-		width: 100px;
-		height: 100px;
+		width: 140px;
+		height: 140px;
 		border-radius: 50%;
 		background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
 		display: flex;
@@ -187,6 +238,27 @@ const links: LinkItem[] = [
 			0 4px 24px rgba(102, 126, 234, 0.35),
 			0 0 0 4px rgba(255, 255, 255, 0.8);
 		animation: pulse-glow 3s ease-in-out infinite;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.avatar-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	.avatar-image[data-failed="true"] {
+		display: none;
+	}
+
+	.avatar-image[data-failed="true"] ~ .avatar-text {
+		display: block;
+	}
+
+	.avatar:has(.avatar-image:not([data-failed="true"])) .avatar-text {
+		display: none;
 	}
 
 	@keyframes pulse-glow {
@@ -195,7 +267,7 @@ const links: LinkItem[] = [
 	}
 
 	.avatar-text {
-		font-size: 2.5rem;
+		font-size: 3.25rem;
 		font-weight: 700;
 		color: white;
 		text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -224,50 +296,90 @@ const links: LinkItem[] = [
 	.link-card {
 		display: flex;
 		align-items: center;
-		gap: 0.875rem;
-		padding: 0.8rem 1.15rem;
-		background: rgba(255, 255, 255, 0.85);
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
-		border: 1px solid rgba(0, 0, 0, 0.06);
+		gap: 1rem;
+		padding: 0.95rem 1.2rem;
+		background: var(--gradient);
+		border: 1px solid rgba(255, 255, 255, 0.15);
 		border-radius: 14px;
 		text-decoration: none;
-		color: #1a1a1a;
-		transition: all 0.25s ease;
+		color: white;
+		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+		transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 	}
 
 	.link-card:hover {
-		background: rgba(255, 255, 255, 0.95);
-		border-color: var(--accent);
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 		transform: translateY(-2px);
-	}
-
-	.link-card:hover .link-icon-wrap {
-		background: var(--gradient);
-	}
-
-	.link-card:hover .link-icon {
-		color: white;
+		filter: brightness(1.08);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 	}
 
 	.link-icon-wrap {
-		width: 38px;
-		height: 38px;
-		border-radius: 10px;
-		background: #f0f0f0;
+		width: 54px;
+		height: 54px;
+		flex-shrink: 0;
+		position: relative;
+	}
+
+	.link-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.18);
+		border: 2px solid rgba(255, 255, 255, 0.3);
+	}
+
+	/* Platform badge in bottom-right corner */
+	.platform-badge {
+		position: absolute;
+		bottom: -2px;
+		right: -2px;
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		flex-shrink: 0;
-		transition: background 0.25s ease;
+		border: 2.5px solid white;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 	}
 
-	.link-icon {
-		width: 20px;
-		height: 20px;
-		color: #555;
-		transition: color 0.25s ease;
+	.platform-badge svg {
+		width: 14px;
+		height: 14px;
+		fill: white;
+	}
+
+	.platform-discord { background: #5865F2; }
+	.platform-telegram { background: #229ED9; }
+	.platform-steam { background: #1B2838; }
+	.platform-github { background: #24292e; }
+
+	/* If image fails to load, show fallback SVG icon */
+	.link-image:not([src]),
+	.link-image[src=""],
+	.link-image[alt]:after {
+		display: none;
+	}
+
+	.link-icon-fallback {
+		display: none;
+		width: 28px;
+		height: 28px;
+		color: white;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.link-image[data-failed="true"] {
+		display: none;
+	}
+
+	.link-image[data-failed="true"] ~ .link-icon-fallback {
+		display: block;
 	}
 
 	.link-text {
@@ -280,27 +392,28 @@ const links: LinkItem[] = [
 
 	.link-name {
 		font-weight: 600;
-		font-size: 0.9rem;
+		font-size: 0.95rem;
 		line-height: 1.2;
+		color: white;
 	}
 
 	.link-subtitle {
-		font-size: 0.75rem;
-		color: #999;
+		font-size: 0.78rem;
+		color: rgba(255, 255, 255, 0.8);
 		font-weight: 400;
 	}
 
 	.arrow {
 		width: 18px;
 		height: 18px;
-		color: #ccc;
+		color: rgba(255, 255, 255, 0.7);
 		flex-shrink: 0;
-		transition: all 0.25s ease;
+		transition: transform 0.2s ease;
 	}
 
 	.link-card:hover .arrow {
 		transform: translateX(3px);
-		color: var(--accent);
+		color: white;
 	}
 
 	footer {
