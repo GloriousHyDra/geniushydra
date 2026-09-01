@@ -1,46 +1,60 @@
-# Astro Starter Kit: Basics
+# GeniusHydra — personal link page
 
-```sh
-npm create astro@latest -- --template basics
-```
+A dark-mode "link in bio" site built with **plain HTML, CSS and JavaScript** — no framework, no build step, no dependencies.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Project structure
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+geniushydra-web/
+├── index.html          ← the page (content + inline SVG icon sprite)
+├── css/
+│   └── style.css       ← dark theme, aurora background, cards
+├── js/
+│   └── main.js         ← image fallbacks, year, mouse parallax
+└── assets/
+    ├── favicon.svg / favicon.ico
+    └── icons/          ← avatar + platform icons
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Run it locally
 
-## 🧞 Commands
+Just open `index.html` in a browser, or serve it:
 
-All commands are run from the root of the project, from a terminal:
+```sh
+cd geniushydra-web
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+# Python 3
+python -m http.server 4321
 
-## 👀 Want to learn more?
+# or Node
+npx serve .
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Then visit http://localhost:4321
+
+## Deploy
+
+Drop the folder on any static host — GitHub Pages, Netlify, Vercel, Cloudflare Pages, etc. No build command required.
+
+## Editing links
+
+All links live in `index.html` inside `<nav class="links">`. Each card looks like:
+
+```html
+<a class="link-card" style="--accent: #5865F2; --i: 0" href="YOUR_URL" target="_blank" rel="noopener noreferrer">
+	<span class="link-icon img-box">
+		<img src="assets/icons/your-icon.png" alt="" />
+		<svg class="img-fallback" viewBox="0 0 24 24"><use href="#icon-discord" /></svg>
+		<span class="platform-badge platform-discord"><svg viewBox="0 0 24 24"><use href="#icon-discord" /></svg></span>
+	</span>
+	<span class="link-text">
+		<span class="link-name">Label</span>
+		<span class="link-subtitle">Subtitle</span>
+	</span>
+	<svg class="arrow" ...>...</svg>
+</a>
+```
+
+- `--accent` controls the hover glow colour per card.
+- `--i` controls the stagger order of the entrance animation.
+- The `#icon-*` symbols are defined at the bottom of `index.html` and used as fallbacks if an icon image fails to load.
