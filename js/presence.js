@@ -1,15 +1,17 @@
-/* GeniusHydra — живой статус Discord через API Lanyard */
+/* GeniusHydra — живой статус Discord и список активностей через API Lanyard */
 (function () {
 	'use strict';
 
 	var cfg = window.SITE_CONFIG || {};
 	var discordId = cfg.discordId;
-	var els = Array.from(document.querySelectorAll('[data-discord-status]'));
-	if (!els.length) return;
+	var statusEls = Array.from(document.querySelectorAll('[data-discord-status]'));
+	var listEls = Array.from(document.querySelectorAll('[data-discord-activities]'));
+	if (!statusEls.length && !listEls.length) return;
 
 	var STATUS_LABEL = { online: 'в сети', idle: 'отошёл', dnd: 'не беспокоить', offline: 'не в сети' };
+	var TYPE_ORDER = { 0: 0, 1: 1, 3: 2, 5: 3, 2: 4, 4: 5 };
 
-	function render(el, state, text) {
+	function setStatus(el, state, text) {
 		el.textContent = '';
 		var dot = document.createElement('span');
 		dot.className = 'status-dot ' + state;
@@ -18,11 +20,56 @@
 		el.hidden = false;
 	}
 
-	// Если Discord ID не указан, подсказка показывается только на необязательных элементах.
+	function activityInfo(a) {
+		switch (a.type) {
+			case 0: return { icon: '🎮', label: 'Играет в ' + (a.name || 'игру'), detail: a.details || '' };
+			case 1: return { icon: '📺', label: 'Стримит ' + (a.name || a.details || ''), detail: a.state || '' };
+			case 2: return { icon: '🎧', label: 'Слушает ' + (a.details || a.name || 'музыку'), detail: a.state || '' };
+			case 3: return { icon: '🍿', label: 'Смотрит ' + (a.name || ''), detail: '' };
+			case 4: return { icon: (a.emoji && a.emoji.name) ? a.emoji.name : '💬', label: a.state || 'Статус', detail: '' };
+			case 5: return { icon: '🏆', label: 'Соревнуется в ' + (a.name || ''), detail: '' };
+			default: return { icon: '', label: a.name || a.state || '', detail: '' };
+		}
+	}
+
+	function renderList(el, activities) {
+		el.textContent = '';
+		activities.forEach(function (a) {
+			var info = activityInfo(a);
+
+			var item = document.createElement('div');
+			item.className = 'activity-item';
+
+			var icon = document.createElement('span');
+			icon.className = 'act-icon';
+			icon.textContent = info.icon;
+
+			var text = document.createElement('span');
+			text.className = 'act-text';
+
+			var label = document.createElement('span');
+			label.className = 'act-label';
+			label.textContent = info.label;
+			text.appendChild(label);
+
+			if (info.detail) {
+				var detail = document.createElement('span');
+				detail.className = 'act-detail';
+				detail.textContent = info.detail;
+				text.appendChild(detail);
+			}
+
+			item.appendChild(icon);
+			item.appendChild(text);
+			el.appendChild(item);
+		});
+		el.hidden = false;
+	}
+
 	if (!discordId) {
-		els.forEach(function (el) {
+		statusEls.forEach(function (el) {
 			if (!el.hasAttribute('data-discord-optional')) {
-				render(el, 'offline', 'Discord ID не указан — смотри config.js');
+				setStatus(el, 'offline', 'Discord ID не указан — смотри config.js');
 			}
 		});
 		return;
@@ -42,18 +89,28 @@
 				? d.discord_user.username
 				: 'Discord';
 
-			var activities = d.activities || [];
+			var activities = (d.activities || []).slice().sort(function (a, b) {
+				var oa = TYPE_ORDER[a.type] !== undefined ? TYPE_ORDER[a.type] : 9;
+				var ob = TYPE_ORDER[b.type] !== undefined ? TYPE_ORDER[b.type] : 9;
+				return oa - ob;
+			});
+
+			// Главная активность для статусной строки
 			var custom = activities.filter(function (a) { return a.type === 4; })[0];
 			var game = activities.filter(function (a) { return a.type === 0; })[0];
+			var primary = custom || game || activities[0];
 
 			var label = username;
-			if (custom && custom.state) label = custom.state;
-			else if (game && game.name) label = 'Играет в ' + game.name;
+			if (primary) label = activityInfo(primary).label;
 
 			var suffix = state === 'online' ? '' : ' · ' + STATUS_LABEL[state];
-			els.forEach(function (el) { render(el, state, label + suffix); });
+			statusEls.forEach(function (el) { setStatus(el, state, label + suffix); });
+
+			if (activities.length) {
+				listEls.forEach(function (el) { renderList(el, activities); });
+			}
 		})
 		.catch(function () {
-			els.forEach(function (el) { render(el, 'offline', 'Статус Discord недоступен'); });
+			statusEls.forEach(function (el) { setStatus(el, 'offline', 'Статус Discord недоступен'); });
 		});
 })();

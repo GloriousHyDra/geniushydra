@@ -312,6 +312,43 @@ h1 {
 .status-dot.offline { background: #64748b; }
 
 /* --------------------------------------------------------------------------
+   Activity list (Discord)
+   -------------------------------------------------------------------------- */
+
+.activities {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-bottom: 1.1rem;
+}
+
+.activity-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.55rem;
+	padding: 0.45rem 0.9rem;
+	border-radius: 999px;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	font-size: 0.85rem;
+}
+
+.act-icon { font-size: 1rem; line-height: 1; }
+
+.act-text {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	text-align: left;
+	line-height: 1.2;
+}
+
+.act-label { font-weight: 600; }
+
+.act-detail { color: var(--muted); font-size: 0.76rem; }
+
+/* --------------------------------------------------------------------------
    Copy buttons
    -------------------------------------------------------------------------- */
 
