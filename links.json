@@ -1,7 +1,7 @@
 [
 	{
 		"name": "Made in heaven",
-		"subtitle": "My Discord",
+		"subtitle": "Мой Discord",
 		"url": "https://discord.com/users/geniushydra",
 		"icon": "assets/icons/discord.png",
 		"platform": "discord",
@@ -9,7 +9,7 @@
 	},
 	{
 		"name": "HyDra's Chill House",
-		"subtitle": "My Discord server",
+		"subtitle": "Мой Discord-сервер",
 		"url": "https://discord.gg/mq5Tv7Q",
 		"icon": "assets/icons/discord-server.png",
 		"platform": "discord",
@@ -17,7 +17,7 @@
 	},
 	{
 		"name": "GeniusHydra",
-		"subtitle": "My Telegram",
+		"subtitle": "Мой Telegram",
 		"url": "https://t.me/geniushydra",
 		"icon": "assets/icons/telegram.png",
 		"platform": "telegram",
@@ -25,7 +25,7 @@
 	},
 	{
 		"name": "Чиллхаус",
-		"subtitle": "My Telegram Channel",
+		"subtitle": "Мой Telegram-канал",
 		"url": "https://t.me/hydrachillhouse",
 		"icon": "assets/icons/telegram-channel.png",
 		"platform": "telegram",
@@ -33,7 +33,7 @@
 	},
 	{
 		"name": "HyDra",
-		"subtitle": "My Steam",
+		"subtitle": "Мой Steam",
 		"url": "https://steamcommunity.com/id/geniushydra/",
 		"icon": "assets/icons/steam.png",
 		"platform": "steam",

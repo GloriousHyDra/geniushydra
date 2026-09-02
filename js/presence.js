@@ -1,4 +1,4 @@
-/* GeniusHydra — live Discord status via the Lanyard API */
+/* GeniusHydra — живой статус Discord через API Lanyard */
 (function () {
 	'use strict';
 
@@ -6,6 +6,8 @@
 	var discordId = cfg.discordId;
 	var els = Array.from(document.querySelectorAll('[data-discord-status]'));
 	if (!els.length) return;
+
+	var STATUS_LABEL = { online: 'в сети', idle: 'отошёл', dnd: 'не беспокоить', offline: 'не в сети' };
 
 	function render(el, state, text) {
 		el.textContent = '';
@@ -16,11 +18,11 @@
 		el.hidden = false;
 	}
 
-	// If the Discord ID isn't configured, only non-optional elements show a hint.
+	// Если Discord ID не указан, подсказка показывается только на необязательных элементах.
 	if (!discordId) {
 		els.forEach(function (el) {
 			if (!el.hasAttribute('data-discord-optional')) {
-				render(el, 'offline', 'Discord ID not set — see config.js');
+				render(el, 'offline', 'Discord ID не указан — смотри config.js');
 			}
 		});
 		return;
@@ -46,12 +48,12 @@
 
 			var label = username;
 			if (custom && custom.state) label = custom.state;
-			else if (game && game.name) label = 'Playing ' + game.name;
+			else if (game && game.name) label = 'Играет в ' + game.name;
 
-			var suffix = state === 'online' ? '' : ' · ' + state;
+			var suffix = state === 'online' ? '' : ' · ' + STATUS_LABEL[state];
 			els.forEach(function (el) { render(el, state, label + suffix); });
 		})
 		.catch(function () {
-			els.forEach(function (el) { render(el, 'offline', 'Discord status unavailable'); });
+			els.forEach(function (el) { render(el, 'offline', 'Статус Discord недоступен'); });
 		});
 })();

@@ -1,45 +1,45 @@
-# GeniusHydra — personal site
+# GeniusHydra — персональный сайт
 
-A dark-mode personal website built with **plain HTML, CSS and JavaScript** — no framework, no build step, no dependencies. Deployed on Cloudflare Pages.
+Тёмный персональный сайт на **чистых HTML, CSS и JavaScript** — без фреймворков, без сборки, без зависимостей. Деплой на Cloudflare Pages.
 
-## Pages
+## Страницы
 
-| Path | Description |
-|------|-------------|
-| `/` | Link-in-bio home (avatar, copy buttons, live Discord status, social links) |
-| `/about.html` | Bio |
-| `/setup.html` | PC / peripherals / software |
-| `/gallery.html` | Image gallery with lightbox |
-| `/presence.html` | Live "where I'm active" status |
-| `/404.html` | Custom 404 |
+| Путь | Описание |
+|------|----------|
+| `/` | Главная (аватар, кнопки «скопировать», живой статус Discord, ссылки) |
+| `/about.html` | Обо мне |
+| `/setup.html` | ПК / периферия / софт |
+| `/gallery.html` | Галерея с лайтбоксом |
+| `/presence.html` | Живой статус «где я активен» |
+| `/404.html` | Своя страница 404 |
 
-## Project structure
+## Структура
 
 ```text
-├── index.html          ← home
+├── index.html          ← главная
 ├── about.html
 ├── setup.html
 ├── gallery.html
 ├── presence.html
 ├── 404.html
-├── links.json          ← social links (edit this to change your links)
-├── config.js           ← site config (Discord ID, usernames, analytics)
+├── links.json          ← ссылки (меняй их здесь)
+├── config.js           ← настройки (Discord ID, никнеймы, аналитика)
 ├── robots.txt
 ├── sitemap.xml
 ├── css/style.css
 ├── js/
-│   ├── main.js         ← theme switcher, copy buttons, nav, parallax
-│   ├── links.js        ← renders links from links.json
-│   ├── presence.js     ← live Discord status (Lanyard)
-│   └── gallery.js      ← lightbox
+│   ├── main.js         ← смена темы, кнопки копирования, навигация, параллакс
+│   ├── links.js        ← рендер ссылок из links.json
+│   ├── presence.js     ← живой статус Discord (Lanyard)
+│   └── gallery.js      ← лайтбокс
 └── assets/
     ├── favicon.svg / favicon.ico
-    ├── og-image.png    ← social share preview card
-    ├── icons/          ← avatar + platform icons
-    └── gallery/        ← drop your gallery images here (1.jpg, 2.jpg, …)
+    ├── og-image.png    ← карточка для соцсетей
+    ├── icons/          ← аватар и иконки платформ
+    └── gallery/        ← клади сюда картинки галереи (1.jpg, 2.jpg, …)
 ```
 
-## Run locally
+## Запуск локально
 
 ```sh
 cd geniushydra
@@ -47,40 +47,40 @@ python -m http.server 4321
 # → http://localhost:4321
 ```
 
-> Use a local server (not double-clicking `index.html`) — the link list is fetched from `links.json`, which needs HTTP.
+> Используй локальный сервер (не двойной клик по index.html) — список ссылок загружается из links.json, а для этого нужен HTTP.
 
-## Customize
+## Настройка
 
-### Social links
-Edit **`links.json`**. Each entry:
+### Ссылки
+Редактируй **`links.json`**. Каждая запись:
 
 ```json
 {
-	"name": "Label",
-	"subtitle": "Subtitle",
+	"name": "Название",
+	"subtitle": "Подпись",
 	"url": "https://…",
 	"icon": "assets/icons/your-icon.png",
 	"platform": "discord",   // discord | telegram | steam | github
-	"accent": "#5865F2"       // hover glow colour
+	"accent": "#5865F2"       // цвет свечения при наведении
 }
 ```
 
-### Copy buttons + Discord status
-Edit **`config.js`**:
-- `usernames` — what the Discord/Telegram/Steam copy buttons copy.
-- `discordId` — your numeric Discord user ID for the live status badge
-  (Discord → Settings → Advanced → enable Developer Mode → right-click your profile → Copy User ID).
-  You also need to join the [Lanyard Discord](https://discord.gg/lanyard) server so your presence is tracked.
-- `goatcounter` — optional analytics code (leave `''` to disable).
+### Кнопки копирования и статус Discord
+Редактируй **`config.js`**:
+- `usernames` — что копируют кнопки Discord/Telegram/Steam.
+- `discordId` — твой числовой ID пользователя Discord для живого бейджа статуса
+  (Discord → Настройки → Расширенные → включи «Режим разработчика» → ПКМ по профилю → «Скопировать ID пользователя»).
+  Также нужно состоять на сервере [Lanyard Discord](https://discord.gg/lanyard), чтобы присутствие отслеживалось.
+- `goatcounter` — код аналитики (оставь `''` чтобы отключить).
 
-### Accent colour
-Five accent themes are available via the colour dots in the nav (saved in `localStorage`). Add or change themes in `css/style.css` (the `[data-accent=…]` blocks) and the matching buttons in each page's nav.
+### Цвет акцента
+Пять тем переключаются цветными точками в навигации (сохраняются в `localStorage`). Темы задаются в `css/style.css` (блоки `[data-accent=…]`) и кнопками в навигации каждой страницы.
 
-### Gallery
-Drop images into `assets/gallery/` as `1.jpg`, `2.jpg`, … (or edit the `src` attributes in `gallery.html`). Tiles whose image is missing are hidden automatically.
+### Галерея
+Клади изображения в `assets/gallery/` как `1.jpg`, `2.jpg`, … (или меняй `src` в `gallery.html`). Плитки с отсутствующими картинками скрываются автоматически.
 
-## Deploy
+## Деплой
 
-Push to `main` — Cloudflare Pages serves the repo root with **no build step**. Build settings:
-- **Build command:** *(empty)*
+Пуш в `main` — Cloudflare Pages отдаёт корень репозитория **без шага сборки**. Настройки сборки:
+- **Build command:** *(пусто)*
 - **Build output directory:** `/`

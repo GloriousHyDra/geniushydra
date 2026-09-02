@@ -99,7 +99,7 @@
 			var original = btn.innerHTML;
 			function done() {
 				btn.classList.add('copied');
-				btn.textContent = '✓ Copied';
+				btn.textContent = '✓ Скопировано';
 				setTimeout(function () {
 					btn.classList.remove('copied');
 					btn.innerHTML = original;
