@@ -24,7 +24,7 @@
 		switch (a.type) {
 			case 0: return { icon: '🎮', label: 'Играет в ' + (a.name || 'игру'), detail: a.details || '' };
 			case 1: return { icon: '📺', label: 'Стримит ' + (a.name || a.details || ''), detail: a.state || '' };
-			case 2: return { icon: '🎧', label: 'Слушает ' + (a.details || a.name || 'музыку'), detail: a.state || '' };
+			case 2: return { icon: '🎧', label: 'Слушает — ' + (a.details || a.name || 'музыку'), detail: a.state || '' };
 			case 3: return { icon: '🍿', label: 'Смотрит ' + (a.name || ''), detail: '' };
 			case 4: return { icon: (a.emoji && a.emoji.name) ? a.emoji.name : '💬', label: a.state || 'Статус', detail: '' };
 			case 5: return { icon: '🏆', label: 'Соревнуется в ' + (a.name || ''), detail: '' };
