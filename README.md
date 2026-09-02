@@ -1,60 +1,86 @@
-# GeniusHydra — personal link page
+# GeniusHydra — personal site
 
-A dark-mode "link in bio" site built with **plain HTML, CSS and JavaScript** — no framework, no build step, no dependencies.
+A dark-mode personal website built with **plain HTML, CSS and JavaScript** — no framework, no build step, no dependencies. Deployed on Cloudflare Pages.
+
+## Pages
+
+| Path | Description |
+|------|-------------|
+| `/` | Link-in-bio home (avatar, copy buttons, live Discord status, social links) |
+| `/about.html` | Bio |
+| `/setup.html` | PC / peripherals / software |
+| `/gallery.html` | Image gallery with lightbox |
+| `/presence.html` | Live "where I'm active" status |
+| `/404.html` | Custom 404 |
 
 ## Project structure
 
 ```text
-geniushydra-web/
-├── index.html          ← the page (content + inline SVG icon sprite)
-├── css/
-│   └── style.css       ← dark theme, aurora background, cards
+├── index.html          ← home
+├── about.html
+├── setup.html
+├── gallery.html
+├── presence.html
+├── 404.html
+├── links.json          ← social links (edit this to change your links)
+├── config.js           ← site config (Discord ID, usernames, analytics)
+├── robots.txt
+├── sitemap.xml
+├── css/style.css
 ├── js/
-│   └── main.js         ← image fallbacks, year, mouse parallax
+│   ├── main.js         ← theme switcher, copy buttons, nav, parallax
+│   ├── links.js        ← renders links from links.json
+│   ├── presence.js     ← live Discord status (Lanyard)
+│   └── gallery.js      ← lightbox
 └── assets/
     ├── favicon.svg / favicon.ico
-    └── icons/          ← avatar + platform icons
+    ├── og-image.png    ← social share preview card
+    ├── icons/          ← avatar + platform icons
+    └── gallery/        ← drop your gallery images here (1.jpg, 2.jpg, …)
 ```
 
-## Run it locally
-
-Just open `index.html` in a browser, or serve it:
+## Run locally
 
 ```sh
-cd geniushydra-web
-
-# Python 3
+cd geniushydra
 python -m http.server 4321
-
-# or Node
-npx serve .
+# → http://localhost:4321
 ```
 
-Then visit http://localhost:4321
+> Use a local server (not double-clicking `index.html`) — the link list is fetched from `links.json`, which needs HTTP.
+
+## Customize
+
+### Social links
+Edit **`links.json`**. Each entry:
+
+```json
+{
+	"name": "Label",
+	"subtitle": "Subtitle",
+	"url": "https://…",
+	"icon": "assets/icons/your-icon.png",
+	"platform": "discord",   // discord | telegram | steam | github
+	"accent": "#5865F2"       // hover glow colour
+}
+```
+
+### Copy buttons + Discord status
+Edit **`config.js`**:
+- `usernames` — what the Discord/Telegram/Steam copy buttons copy.
+- `discordId` — your numeric Discord user ID for the live status badge
+  (Discord → Settings → Advanced → enable Developer Mode → right-click your profile → Copy User ID).
+  You also need to join the [Lanyard Discord](https://discord.gg/lanyard) server so your presence is tracked.
+- `goatcounter` — optional analytics code (leave `''` to disable).
+
+### Accent colour
+Five accent themes are available via the colour dots in the nav (saved in `localStorage`). Add or change themes in `css/style.css` (the `[data-accent=…]` blocks) and the matching buttons in each page's nav.
+
+### Gallery
+Drop images into `assets/gallery/` as `1.jpg`, `2.jpg`, … (or edit the `src` attributes in `gallery.html`). Tiles whose image is missing are hidden automatically.
 
 ## Deploy
 
-Drop the folder on any static host — GitHub Pages, Netlify, Vercel, Cloudflare Pages, etc. No build command required.
-
-## Editing links
-
-All links live in `index.html` inside `<nav class="links">`. Each card looks like:
-
-```html
-<a class="link-card" style="--accent: #5865F2; --i: 0" href="YOUR_URL" target="_blank" rel="noopener noreferrer">
-	<span class="link-icon img-box">
-		<img src="assets/icons/your-icon.png" alt="" />
-		<svg class="img-fallback" viewBox="0 0 24 24"><use href="#icon-discord" /></svg>
-		<span class="platform-badge platform-discord"><svg viewBox="0 0 24 24"><use href="#icon-discord" /></svg></span>
-	</span>
-	<span class="link-text">
-		<span class="link-name">Label</span>
-		<span class="link-subtitle">Subtitle</span>
-	</span>
-	<svg class="arrow" ...>...</svg>
-</a>
-```
-
-- `--accent` controls the hover glow colour per card.
-- `--i` controls the stagger order of the entrance animation.
-- The `#icon-*` symbols are defined at the bottom of `index.html` and used as fallbacks if an icon image fails to load.
+Push to `main` — Cloudflare Pages serves the repo root with **no build step**. Build settings:
+- **Build command:** *(empty)*
+- **Build output directory:** `/`
