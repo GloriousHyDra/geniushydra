@@ -267,6 +267,7 @@ h1 {
 	font-size: 1.9rem;
 	font-weight: 800;
 	letter-spacing: -0.02em;
+	margin-bottom: 1.25rem;
 	background: linear-gradient(90deg, #fff, #c9cdf5 55%, #8b93d8);
 	-webkit-background-clip: text;
 	background-clip: text;
