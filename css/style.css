@@ -348,6 +348,15 @@ h1 {
 
 .act-detail { color: var(--muted); font-size: 0.76rem; }
 
+.act-art {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	object-fit: cover;
+	flex-shrink: 0;
+	border: 1px solid var(--border);
+}
+
 /* --------------------------------------------------------------------------
    Copy buttons
    -------------------------------------------------------------------------- */

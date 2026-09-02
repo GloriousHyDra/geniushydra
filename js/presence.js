@@ -32,17 +32,29 @@
 		}
 	}
 
-	function renderList(el, activities) {
+	function renderList(el, activities, spotify) {
 		el.textContent = '';
 		activities.forEach(function (a) {
 			var info = activityInfo(a);
+			var artUrl = a.type === 2 && spotify && spotify.album_art_url ? spotify.album_art_url : null;
 
 			var item = document.createElement('div');
 			item.className = 'activity-item';
 
-			var icon = document.createElement('span');
-			icon.className = 'act-icon';
-			icon.textContent = info.icon;
+			if (artUrl) {
+				var art = document.createElement('img');
+				art.className = 'act-art';
+				art.alt = '';
+				art.loading = 'lazy';
+				art.onerror = function () { art.remove(); };
+				art.src = artUrl;
+				item.appendChild(art);
+			} else {
+				var icon = document.createElement('span');
+				icon.className = 'act-icon';
+				icon.textContent = info.icon;
+				item.appendChild(icon);
+			}
 
 			var text = document.createElement('span');
 			text.className = 'act-text';
@@ -59,7 +71,6 @@
 				text.appendChild(detail);
 			}
 
-			item.appendChild(icon);
 			item.appendChild(text);
 			el.appendChild(item);
 		});
@@ -89,6 +100,8 @@
 				? d.discord_user.username
 				: 'Discord';
 
+			var spotify = d.spotify || null;
+
 			var activities = (d.activities || []).slice().sort(function (a, b) {
 				var oa = TYPE_ORDER[a.type] !== undefined ? TYPE_ORDER[a.type] : 9;
 				var ob = TYPE_ORDER[b.type] !== undefined ? TYPE_ORDER[b.type] : 9;
@@ -107,7 +120,7 @@
 			statusEls.forEach(function (el) { setStatus(el, state, label + suffix); });
 
 			if (activities.length) {
-				listEls.forEach(function (el) { renderList(el, activities); });
+				listEls.forEach(function (el) { renderList(el, activities, spotify); });
 			}
 		})
 		.catch(function () {
