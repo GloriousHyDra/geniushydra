@@ -967,6 +967,28 @@ h1 {
 	color: var(--muted);
 }
 
+.steam-games {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+}
+
+.steam-game {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 0.8rem;
+	border: 1px solid var(--border);
+	background: var(--surface);
+	border-radius: var(--radius);
+	padding: 0.55rem 0.9rem;
+	font-size: 0.85rem;
+}
+
+.steam-game .sg-name { font-weight: 600; }
+.steam-game .sg-hours { color: var(--muted); white-space: nowrap; }
+.steam-empty { color: var(--muted); font-size: 0.82rem; }
+
 /* --------------------------------------------------------------------------
    Entrance + responsive + reduced motion
    -------------------------------------------------------------------------- */
