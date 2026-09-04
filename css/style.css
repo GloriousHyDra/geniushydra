@@ -25,6 +25,9 @@
 [data-season='halloween'] { --text: #ffb35c; --accent: #ff7a00; --muted: #8a6a3d; --border: #6b3d1a; --surface: rgba(255, 122, 0, 0.05); }
 [data-season='newyear']   { --text: #ff7b7b; --accent: #ffd166; --muted: #9e5a5a; --border: #7a2e2e; --surface: rgba(255, 123, 123, 0.05); }
 [data-season='cny']       { --text: #ff5555; --accent: #ffd700; --muted: #9e4d4d; --border: #7a1f1f; --surface: rgba(255, 85, 85, 0.05); }
+[data-season='valentine'] { --text: #ff7ab8; --accent: #ff3b6b; --muted: #9e5a7a; --border: #6b2a4a; --surface: rgba(255, 59, 107, 0.05); }
+[data-season='easter']    { --text: #d6b8ff; --accent: #b98cff; --muted: #8a6db8; --border: #5a3d8a; --surface: rgba(185, 140, 255, 0.05); }
+[data-season='birthday']  { --text: #ffd166; --accent: #ff6ec7; --muted: #a08a3d; --border: #6b5a1a; --surface: rgba(255, 209, 102, 0.05); }
 
 *,
 *::before,
@@ -747,6 +750,64 @@ h1 {
 @keyframes blink {
 	0%, 49% { opacity: 1; }
 	50%, 100% { opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Falling FX particles + season preview panel
+   -------------------------------------------------------------------------- */
+
+.fx-container {
+	position: fixed;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+	z-index: 45;
+}
+
+.fx-particle {
+	position: absolute;
+	top: -40px;
+	animation-name: fx-fall;
+	animation-timing-function: linear;
+	animation-fill-mode: forwards;
+	will-change: transform;
+}
+
+@keyframes fx-fall {
+	to { transform: translateY(115vh) rotate(360deg); }
+}
+
+.preview-panel {
+	position: fixed;
+	right: 0.9rem;
+	bottom: 0.9rem;
+	z-index: 55;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	background: rgba(0, 0, 0, 0.88);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	padding: 0.55rem;
+}
+
+.preview-btn {
+	background: transparent;
+	border: 1px solid var(--border);
+	color: var(--text);
+	font-family: inherit;
+	font-size: 0.75rem;
+	padding: 0.3rem 0.55rem;
+	cursor: pointer;
+	text-align: left;
+	transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.preview-btn:hover,
+.preview-btn.active {
+	background: var(--accent);
+	color: #000;
+	border-color: var(--accent);
 }
 
 /* --------------------------------------------------------------------------
