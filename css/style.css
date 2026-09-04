@@ -272,6 +272,22 @@ body::before {
 	border: 3px solid var(--bg);
 }
 
+/* Image fallback (shown only if an image fails to load) */
+.img-box .img-fallback { display: none; }
+
+.img-box.is-failed img { display: none; }
+
+.img-box.is-failed .img-fallback {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.avatar .img-fallback {
+	position: absolute;
+	inset: 0;
+}
+
 /* --------------------------------------------------------------------------
    Headings
    -------------------------------------------------------------------------- */
