@@ -89,6 +89,8 @@
 		}
 	}
 
+	window.__applySeason = applySeason;
+
 	/* ---------- preview panel (?preview=1 or ?season=…) ---------- */
 
 	function setupPreview(activeId) {

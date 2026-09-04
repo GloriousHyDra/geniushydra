@@ -32,6 +32,10 @@
 <body>
 	<div class="crt-overlay" aria-hidden="true"></div>
 
+	<div class="boot-overlay" id="boot-overlay">
+		<div class="boot-output"></div>
+	</div>
+
 	<header class="site-header">
 		<nav class="nav">
 			<a class="nav-brand" href="/">geniushydra@web:~<span class="cursor">█</span></a>
@@ -76,6 +80,7 @@
 			<p class="prompt-line"><span class="prompt">$</span> status</p>
 			<span class="status-pill" data-discord-status data-discord-optional hidden></span>
 			<div class="activities" data-discord-activities hidden></div>
+			<div class="spotify-card" data-spotify hidden></div>
 
 			<p class="prompt-line"><span class="prompt">$</span> copy --username</p>
 			<div class="copy-row">
@@ -87,7 +92,13 @@
 			<p class="prompt-line"><span class="prompt">$</span> ls ./links</p>
 			<nav class="links" id="links" aria-label="Социальные ссылки"></nav>
 
-			<p class="prompt-line"><span class="prompt">$</span> <span class="cursor">█</span></p>
+			<div class="term" id="term">
+				<div class="term-history" id="term-history"></div>
+				<form class="term-input-line" id="term-form">
+					<span class="prompt">$</span>
+					<input id="term-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Терминал" />
+				</form>
+			</div>
 		</div>
 	</main>
 
@@ -99,7 +110,10 @@
 	<script src="js/i18n.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/season.js"></script>
+	<script src="js/matrix.js"></script>
+	<script src="js/boot.js"></script>
 	<script src="js/links.js"></script>
 	<script src="js/presence.js"></script>
+	<script src="js/terminal.js"></script>
 </body>
 </html>

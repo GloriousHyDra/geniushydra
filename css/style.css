@@ -811,6 +811,163 @@ h1 {
 }
 
 /* --------------------------------------------------------------------------
+   Matrix rain + boot overlay
+   -------------------------------------------------------------------------- */
+
+.matrix-canvas {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	opacity: 0.2;
+	pointer-events: none;
+}
+
+.boot-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	background: var(--bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem;
+	cursor: pointer;
+	transition: opacity 0.4s ease;
+}
+
+.boot-overlay.done {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.boot-output {
+	font-size: 0.82rem;
+	line-height: 1.7;
+	color: var(--text);
+}
+
+/* --------------------------------------------------------------------------
+   Neofetch
+   -------------------------------------------------------------------------- */
+
+.neofetch {
+	margin: 0 0 1.5rem;
+	padding: 1rem 1.1rem;
+	border: 1px solid var(--border);
+	background: var(--surface);
+	border-radius: var(--radius);
+	font-size: 0.8rem;
+	line-height: 1.7;
+	color: var(--text);
+	overflow-x: auto;
+}
+
+.neofetch .nf-accent { color: var(--accent); font-weight: 700; }
+.neofetch .nf-dim { color: var(--muted); }
+.neofetch .nf-label { color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   Interactive terminal
+   -------------------------------------------------------------------------- */
+
+.term {
+	margin-top: 1.5rem;
+	text-align: left;
+}
+
+.term-history {
+	max-height: 300px;
+	overflow-y: auto;
+	margin-bottom: 0.6rem;
+	font-size: 0.82rem;
+	line-height: 1.65;
+}
+
+.term-history::-webkit-scrollbar { width: 8px; }
+.term-history::-webkit-scrollbar-thumb { background: var(--border); }
+
+.term-cmd { color: var(--text); }
+.term-cmd .prompt { color: var(--accent); }
+.term-out { color: var(--muted); }
+
+.term-input-line {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+}
+
+.term-input-line .prompt { color: var(--accent); }
+
+#term-input {
+	flex: 1;
+	background: transparent;
+	border: none;
+	outline: none;
+	color: var(--text);
+	font-family: inherit;
+	font-size: 0.85rem;
+	caret-color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Spotify now-playing
+   -------------------------------------------------------------------------- */
+
+.spotify-card {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+	border: 1px solid var(--border);
+	background: var(--surface);
+	border-radius: var(--radius);
+	padding: 0.8rem 1rem;
+	text-align: left;
+	margin: 0.7rem 0 1.4rem;
+}
+
+.spotify-art {
+	width: 52px;
+	height: 52px;
+	border-radius: 4px;
+	object-fit: cover;
+	border: 1px solid var(--border);
+	flex-shrink: 0;
+}
+
+.spotify-info {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.spotify-song { font-weight: 700; font-size: 0.9rem; }
+.spotify-artist { color: var(--muted); font-size: 0.78rem; }
+
+.spotify-bar {
+	height: 4px;
+	background: var(--border);
+	border-radius: 2px;
+	overflow: hidden;
+	margin-top: 5px;
+}
+
+.spotify-progress {
+	height: 100%;
+	width: 0;
+	background: var(--accent);
+	transition: width 1s linear;
+}
+
+.spotify-times {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.68rem;
+	color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
    Entrance + responsive + reduced motion
    -------------------------------------------------------------------------- */
 

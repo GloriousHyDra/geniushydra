@@ -1,4 +1,4 @@
-/* GeniusHydra — живой статус Discord и список активностей через API Lanyard */
+/* GeniusHydra — Discord status, activities and Spotify now-playing via Lanyard */
 (function () {
 	'use strict';
 
@@ -8,9 +8,11 @@
 	var discordId = cfg.discordId;
 	var statusEls = Array.from(document.querySelectorAll('[data-discord-status]'));
 	var listEls = Array.from(document.querySelectorAll('[data-discord-activities]'));
-	if (!statusEls.length && !listEls.length) return;
+	var spotifyEls = Array.from(document.querySelectorAll('[data-spotify]'));
+	if (!statusEls.length && !listEls.length && !spotifyEls.length) return;
 
 	var TYPE_ORDER = { 0: 0, 1: 1, 3: 2, 5: 3, 2: 4, 4: 5 };
+	var spotifyTimer = null;
 
 	function statusLabel(state) {
 		return t('status.' + state);
@@ -84,6 +86,94 @@
 		el.hidden = false;
 	}
 
+	function formatTime(ms) {
+		var s = Math.max(0, Math.floor(ms / 1000));
+		var m = Math.floor(s / 60);
+		s = s % 60;
+		return m + ':' + (s < 10 ? '0' : '') + s;
+	}
+
+	function renderSpotify(s) {
+		if (spotifyTimer) { clearInterval(spotifyTimer); spotifyTimer = null; }
+
+		if (!s || !s.song) {
+			spotifyEls.forEach(function (el) { el.hidden = true; el.textContent = ''; });
+			return;
+		}
+
+		var start = s.timestamps && s.timestamps.start ? s.timestamps.start : Date.now();
+		var end = s.timestamps && s.timestamps.end ? s.timestamps.end : start + 180000;
+
+		spotifyEls.forEach(function (el) {
+			el.textContent = '';
+			el.className = 'spotify-card';
+
+			if (s.album_art_url) {
+				var img = document.createElement('img');
+				img.className = 'spotify-art';
+				img.alt = '';
+				img.loading = 'lazy';
+				img.onerror = function () { img.remove(); };
+				img.src = s.album_art_url;
+				el.appendChild(img);
+			}
+
+			var info = document.createElement('div');
+			info.className = 'spotify-info';
+
+			var song = document.createElement('div');
+			song.className = 'spotify-song';
+			song.textContent = s.song;
+			info.appendChild(song);
+
+			if (s.artist) {
+				var artist = document.createElement('div');
+				artist.className = 'spotify-artist';
+				artist.textContent = s.artist;
+				info.appendChild(artist);
+			}
+
+			var bar = document.createElement('div');
+			bar.className = 'spotify-bar';
+			var progress = document.createElement('div');
+			progress.className = 'spotify-progress';
+			bar.appendChild(progress);
+			info.appendChild(bar);
+
+			var times = document.createElement('div');
+			times.className = 'spotify-times';
+			var nowT = document.createElement('span');
+			nowT.className = 'spotify-now';
+			var totalT = document.createElement('span');
+			totalT.className = 'spotify-total';
+			totalT.textContent = formatTime(end - start);
+			times.appendChild(nowT);
+			times.appendChild(totalT);
+			info.appendChild(times);
+
+			el.appendChild(info);
+			el.hidden = false;
+
+			el._progress = progress;
+			el._now = nowT;
+			el._start = start;
+			el._end = end;
+		});
+
+		function tick() {
+			var now = Date.now();
+			spotifyEls.forEach(function (el) {
+				if (!el._progress) return;
+				var pct = Math.min(100, Math.max(0, ((now - el._start) / (el._end - el._start)) * 100));
+				el._progress.style.width = pct + '%';
+				el._now.textContent = formatTime(now - el._start);
+			});
+		}
+
+		tick();
+		spotifyTimer = setInterval(tick, 1000);
+	}
+
 	function load() {
 		if (!discordId) {
 			statusEls.forEach(function (el) {
@@ -91,6 +181,7 @@
 					setStatus(el, 'offline', t('status.notset'));
 				}
 			});
+			renderSpotify(null);
 			return;
 		}
 
@@ -129,9 +220,12 @@
 				if (activities.length) {
 					listEls.forEach(function (el) { renderList(el, activities, spotify); });
 				}
+
+				renderSpotify(spotify);
 			})
 			.catch(function () {
 				statusEls.forEach(function (el) { setStatus(el, 'offline', t('status.unavailable')); });
+				renderSpotify(null);
 			});
 	}
 

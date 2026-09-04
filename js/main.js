@@ -47,6 +47,8 @@
 		try { localStorage.setItem(ACCENT_KEY, accent); } catch (e) { /* ignore */ }
 	}
 
+	window.__setAccent = applyAccent;
+
 	var saved = 'green';
 	try { saved = localStorage.getItem(ACCENT_KEY) || 'green'; } catch (e) { /* ignore */ }
 	applyAccent(saved);
