@@ -19,5 +19,5 @@ window.SITE_CONFIG = {
 	goatcounter: '',
 
 	// URL прокси-воркера Steam (см. инструкцию ниже). Оставь '' чтобы скрыть секцию Steam.
-	steamProxy: ''
+	steamProxy: 'https://geniushydra-steam.lavrinenkom03.workers.dev'
 };

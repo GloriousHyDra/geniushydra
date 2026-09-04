@@ -44,7 +44,10 @@
 
 						var hours = document.createElement('span');
 						hours.className = 'sg-hours';
-						hours.textContent = Math.round((g.playtime_forever || 0) / 60) + ' ' + t('steam.hours');
+						var mins = g.playtime_forever || 0;
+						hours.textContent = mins >= 60
+							? Math.round(mins / 60) + ' ' + t('steam.hours')
+							: mins + ' ' + t('steam.minutes');
 
 						row.appendChild(name);
 						row.appendChild(hours);
