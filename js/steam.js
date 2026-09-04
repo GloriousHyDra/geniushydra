@@ -1,4 +1,4 @@
-/* GeniusHydra — Steam recently played (via a Cloudflare Worker proxy) */
+/* GeniusHydra — Steam profile summary + top games (via Cloudflare Worker proxy) */
 (function () {
 	'use strict';
 
@@ -15,44 +15,73 @@
 		return;
 	}
 
+	function fmt(mins) {
+		return mins >= 60
+			? Math.round(mins / 60) + ' ' + t('steam.hours')
+			: mins + ' ' + t('steam.minutes');
+	}
+
 	function render() {
-		fetch(proxy + '/?steamid=' + STEAM_ID + '&count=5')
+		fetch(proxy + '/summary')
 			.then(function (res) { return res.json(); })
-			.then(function (data) {
-				if (data && data.error) throw new Error(data.error);
-				var games = (data && data.response && data.response.games) || [];
+			.then(function (s) {
+				if (s && s.error) throw new Error(s.error);
 
 				containers.forEach(function (el) {
 					el.textContent = '';
 
-					if (!games.length) {
-						var p0 = document.createElement('p');
-						p0.className = 'steam-empty';
-						p0.textContent = t('steam.none');
-						el.appendChild(p0);
-						el.hidden = false;
-						return;
+					// summary line
+					var summary = document.createElement('div');
+					summary.className = 'steam-summary';
+					var bits = ['[steam]'];
+					if (s.persona) bits.push(s.persona);
+					bits.push(t('steam.level') + ' ' + (s.level || 0));
+					bits.push((s.game_count || 0) + ' ' + t('steam.games'));
+					bits.push(fmt(s.total_minutes || 0));
+					summary.textContent = bits.join(' · ');
+					el.appendChild(summary);
+
+					// live status
+					var status = document.createElement('div');
+					status.className = 'steam-status';
+					var dot = document.createElement('span');
+					if (s.gameid) {
+						dot.className = 'status-dot online';
+						status.appendChild(dot);
+						status.appendChild(document.createTextNode(t('steam.playing') + ': ' + (s.game || '')));
+					} else if (s.state !== 0) {
+						dot.className = 'status-dot online';
+						status.appendChild(dot);
+						status.appendChild(document.createTextNode(t('status.online')));
+					} else {
+						dot.className = 'status-dot offline';
+						status.appendChild(dot);
+						status.appendChild(document.createTextNode(t('status.offline')));
 					}
+					el.appendChild(status);
 
-					games.forEach(function (g) {
-						var row = document.createElement('div');
-						row.className = 'steam-game';
+					// top games
+					var top = s.top || [];
+					if (top.length) {
+						var title = document.createElement('div');
+						title.className = 'steam-top-title';
+						title.textContent = t('steam.top') + ':';
+						el.appendChild(title);
 
-						var name = document.createElement('span');
-						name.className = 'sg-name';
-						name.textContent = g.name;
-
-						var hours = document.createElement('span');
-						hours.className = 'sg-hours';
-						var mins = g.playtime_forever || 0;
-						hours.textContent = mins >= 60
-							? Math.round(mins / 60) + ' ' + t('steam.hours')
-							: mins + ' ' + t('steam.minutes');
-
-						row.appendChild(name);
-						row.appendChild(hours);
-						el.appendChild(row);
-					});
+						top.forEach(function (g) {
+							var row = document.createElement('div');
+							row.className = 'steam-game';
+							var name = document.createElement('span');
+							name.className = 'sg-name';
+							name.textContent = g.name;
+							var hours = document.createElement('span');
+							hours.className = 'sg-hours';
+							hours.textContent = fmt(g.minutes || 0);
+							row.appendChild(name);
+							row.appendChild(hours);
+							el.appendChild(row);
+						});
+					}
 
 					el.hidden = false;
 				});

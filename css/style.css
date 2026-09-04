@@ -989,6 +989,28 @@ h1 {
 .steam-game .sg-hours { color: var(--muted); white-space: nowrap; }
 .steam-empty { color: var(--muted); font-size: 0.82rem; }
 
+.steam-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 0.45rem;
+}
+
+.steam-summary { font-weight: 700; font-size: 0.9rem; }
+
+.steam-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--muted);
+	font-size: 0.85rem;
+}
+
+.steam-top-title {
+	color: var(--muted);
+	font-size: 0.78rem;
+	margin-top: 0.3rem;
+}
+
 /* --------------------------------------------------------------------------
    Entrance + responsive + reduced motion
    -------------------------------------------------------------------------- */
