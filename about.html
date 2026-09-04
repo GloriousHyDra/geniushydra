@@ -3,10 +3,10 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Обо мне — GeniusHydra</title>
-	<meta name="description" content="О GeniusHydra." />
-	<meta property="og:title" content="Обо мне — GeniusHydra" />
-	<meta property="og:description" content="О GeniusHydra." />
+	<title data-i18n="meta.about.title">Обо мне — GeniusHydra</title>
+	<meta name="description" content="О GeniusHydra." data-i18n-content="meta.about.desc" />
+	<meta property="og:title" content="Обо мне — GeniusHydra" data-i18n-content="meta.about.title" />
+	<meta property="og:description" content="О GeniusHydra." data-i18n-content="meta.about.desc" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://geniushydra.com/about.html" />
 	<meta property="og:image" content="https://geniushydra.com/assets/og-image.png" />
@@ -34,12 +34,16 @@
 				<a href="/gallery.html">~/gallery</a>
 				<a href="/presence.html">~/presence</a>
 			</div>
-			<div class="accent-switcher" role="group" aria-label="Цвет фосфора">
-				<button type="button" class="accent-dot" data-accent="green" style="background:#33ff33" title="Зелёный" aria-label="Зелёный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="amber" style="background:#ffb000" title="Янтарный" aria-label="Янтарный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="cyan" style="background:#00e5ff" title="Голубой" aria-label="Голубой фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="red" style="background:#ff5555" title="Красный" aria-label="Красный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="paper" style="background:#e6e6e6" title="Белый" aria-label="Белый фосфор"></button>
+			<div class="nav-controls">
+				<span class="season-emoji" data-season-emoji hidden></span>
+				<button type="button" class="lang-toggle" data-lang-toggle>EN</button>
+				<div class="accent-switcher" role="group" aria-label="Цвет фосфора" data-i18n-title="accent.group">
+					<button type="button" class="accent-dot" data-accent="green" style="background:#33ff33" title="Зелёный" aria-label="Зелёный" data-i18n-title="accent.green"></button>
+					<button type="button" class="accent-dot" data-accent="amber" style="background:#ffb000" title="Янтарный" aria-label="Янтарный" data-i18n-title="accent.amber"></button>
+					<button type="button" class="accent-dot" data-accent="cyan" style="background:#00e5ff" title="Голубой" aria-label="Голубой" data-i18n-title="accent.cyan"></button>
+					<button type="button" class="accent-dot" data-accent="red" style="background:#ff5555" title="Красный" aria-label="Красный" data-i18n-title="accent.red"></button>
+					<button type="button" class="accent-dot" data-accent="paper" style="background:#e6e6e6" title="Белый" aria-label="Белый" data-i18n-title="accent.paper"></button>
+				</div>
 			</div>
 		</nav>
 	</header>
@@ -54,32 +58,32 @@
 
 		<div class="terminal-body">
 			<p class="prompt-line"><span class="prompt">$</span> cat ~/about.md</p>
-			<h1>Обо мне</h1>
-			<p class="lead">Немного обо мне.</p>
+			<h1 data-i18n="about.title">Обо мне</h1>
+			<p class="lead" data-i18n="about.lead">Немного обо мне.</p>
 
 			<section class="section">
-				<h2>Кто я</h2>
+				<h2 data-i18n="about.who">Кто я</h2>
 				<div class="card">
-					<p class="card-sub">Привет, я GeniusHydra — обитаю в Discord, Telegram и Steam. [Замени это на короткую биографию: кто ты, чем занимаешься, что тебе интересно.]</p>
+					<p class="card-sub" data-i18n="about.bio">Привет, я GeniusHydra — обитаю в Discord, Telegram и Steam. [Замени это на короткую биографию: кто ты, чем занимаешься, что тебе интересно.]</p>
 				</div>
 			</section>
 
 			<section class="section">
-				<h2>Чем увлекаюсь</h2>
+				<h2 data-i18n="about.interests">Чем увлекаюсь</h2>
 				<div class="card">
-					<div class="card-title">Игры</div>
-					<p class="card-sub">[Во что играешь, любимые жанры, текущее увлечение.]</p>
+					<div class="card-title" data-i18n="about.games">Игры</div>
+					<p class="card-sub" data-i18n="about.games.text">[Во что играешь, любимые жанры, текущее увлечение.]</p>
 				</div>
 				<div class="card">
-					<div class="card-title">Прочее</div>
-					<p class="card-sub">[Что-нибудь ещё — музыка, стримы, проекты.]</p>
+					<div class="card-title" data-i18n="about.other">Прочее</div>
+					<p class="card-sub" data-i18n="about.other.text">[Что-нибудь ещё — музыка, стримы, проекты.]</p>
 				</div>
 			</section>
 
 			<section class="section">
-				<h2>Связаться со мной</h2>
+				<h2 data-i18n="about.find">Связаться со мной</h2>
 				<div class="card">
-					<p class="card-sub" style="margin-bottom:1rem">Быстрее всего меня найти в Discord или Telegram.</p>
+					<p class="card-sub" style="margin-bottom:1rem" data-i18n="about.find.text">Быстрее всего меня найти в Discord или Telegram.</p>
 					<a class="btn" href="/presence.html">cat ~/presence →</a>
 				</div>
 			</section>
@@ -87,10 +91,12 @@
 	</main>
 
 	<footer class="site-footer">
-		<p>© <span id="year">2025</span> GeniusHydra — все системы работают</p>
+		<p>© <span id="year">2025</span> GeniusHydra — <span data-i18n="footer.note">все системы работают</span></p>
 	</footer>
 
 	<script src="config.js"></script>
+	<script src="js/i18n.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/season.js"></script>
 </body>
 </html>

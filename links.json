@@ -1,41 +1,46 @@
 [
 	{
 		"name": "Made in heaven",
+		"name_en": "Made in heaven",
 		"subtitle": "Мой Discord",
+		"subtitle_en": "My Discord",
 		"url": "https://discord.com/users/geniushydra",
-		"icon": "assets/icons/discord.png",
 		"platform": "discord",
 		"accent": "#5865F2"
 	},
 	{
 		"name": "HyDra's Chill House",
+		"name_en": "HyDra's Chill House",
 		"subtitle": "Мой Discord-сервер",
+		"subtitle_en": "My Discord server",
 		"url": "https://discord.gg/mq5Tv7Q",
-		"icon": "assets/icons/discord-server.png",
 		"platform": "discord",
 		"accent": "#7B68EE"
 	},
 	{
 		"name": "GeniusHydra",
+		"name_en": "GeniusHydra",
 		"subtitle": "Мой Telegram",
+		"subtitle_en": "My Telegram",
 		"url": "https://t.me/geniushydra",
-		"icon": "assets/icons/telegram.png",
 		"platform": "telegram",
 		"accent": "#26A5E4"
 	},
 	{
 		"name": "Чиллхаус",
+		"name_en": "Chillhouse",
 		"subtitle": "Мой Telegram-канал",
+		"subtitle_en": "My Telegram channel",
 		"url": "https://t.me/hydrachillhouse",
-		"icon": "assets/icons/telegram-channel.png",
 		"platform": "telegram",
 		"accent": "#00BCD4"
 	},
 	{
 		"name": "HyDra",
+		"name_en": "HyDra",
 		"subtitle": "Мой Steam",
+		"subtitle_en": "My Steam",
 		"url": "https://steamcommunity.com/id/geniushydra/",
-		"icon": "assets/icons/steam.png",
 		"platform": "steam",
 		"accent": "#1B2838"
 	}

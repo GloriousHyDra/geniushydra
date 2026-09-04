@@ -21,6 +21,11 @@
 [data-accent='red']   { --text: #ff5555; --accent: #ff3333; --muted: #8a1d1d; --border: #6b1a1a; --surface: rgba(255, 85, 85, 0.04); }
 [data-accent='paper'] { --text: #e6e6e6; --accent: #ffffff; --muted: #8a8a8a; --border: #4a4a4a; --surface: rgba(255, 255, 255, 0.04); }
 
+/* Seasonal themes — override the phosphor colour while active */
+[data-season='halloween'] { --text: #ffb35c; --accent: #ff7a00; --muted: #8a6a3d; --border: #6b3d1a; --surface: rgba(255, 122, 0, 0.05); }
+[data-season='newyear']   { --text: #ff7b7b; --accent: #ffd166; --muted: #9e5a5a; --border: #7a2e2e; --surface: rgba(255, 123, 123, 0.05); }
+[data-season='cny']       { --text: #ff5555; --accent: #ffd700; --muted: #9e4d4d; --border: #7a1f1f; --surface: rgba(255, 85, 85, 0.05); }
+
 *,
 *::before,
 *::after {
@@ -160,6 +165,34 @@ body::before {
 	opacity: 1;
 	outline: 1px solid var(--text);
 	outline-offset: 2px;
+}
+
+.nav-controls {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.season-emoji {
+	font-size: 1rem;
+	line-height: 1;
+}
+
+.lang-toggle {
+	background: transparent;
+	border: 1px solid var(--border);
+	color: var(--text);
+	font-family: inherit;
+	font-size: 0.78rem;
+	padding: 0.15rem 0.5rem;
+	cursor: pointer;
+	transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.lang-toggle:hover {
+	background: var(--accent);
+	color: #000;
+	border-color: var(--accent);
 }
 
 /* --------------------------------------------------------------------------

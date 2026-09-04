@@ -3,10 +3,10 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Сетап — GeniusHydra</title>
-	<meta name="description" content="ПК и сетап GeniusHydra." />
-	<meta property="og:title" content="Сетап — GeniusHydra" />
-	<meta property="og:description" content="ПК и сетап GeniusHydra." />
+	<title data-i18n="meta.setup.title">Сетап — GeniusHydra</title>
+	<meta name="description" content="ПК и сетап GeniusHydra." data-i18n-content="meta.setup.desc" />
+	<meta property="og:title" content="Сетап — GeniusHydra" data-i18n-content="meta.setup.title" />
+	<meta property="og:description" content="ПК и сетап GeniusHydra." data-i18n-content="meta.setup.desc" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://geniushydra.com/setup.html" />
 	<meta property="og:image" content="https://geniushydra.com/assets/og-image.png" />
@@ -34,12 +34,16 @@
 				<a href="/gallery.html">~/gallery</a>
 				<a href="/presence.html">~/presence</a>
 			</div>
-			<div class="accent-switcher" role="group" aria-label="Цвет фосфора">
-				<button type="button" class="accent-dot" data-accent="green" style="background:#33ff33" title="Зелёный" aria-label="Зелёный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="amber" style="background:#ffb000" title="Янтарный" aria-label="Янтарный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="cyan" style="background:#00e5ff" title="Голубой" aria-label="Голубой фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="red" style="background:#ff5555" title="Красный" aria-label="Красный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="paper" style="background:#e6e6e6" title="Белый" aria-label="Белый фосфор"></button>
+			<div class="nav-controls">
+				<span class="season-emoji" data-season-emoji hidden></span>
+				<button type="button" class="lang-toggle" data-lang-toggle>EN</button>
+				<div class="accent-switcher" role="group" aria-label="Цвет фосфора" data-i18n-title="accent.group">
+					<button type="button" class="accent-dot" data-accent="green" style="background:#33ff33" title="Зелёный" aria-label="Зелёный" data-i18n-title="accent.green"></button>
+					<button type="button" class="accent-dot" data-accent="amber" style="background:#ffb000" title="Янтарный" aria-label="Янтарный" data-i18n-title="accent.amber"></button>
+					<button type="button" class="accent-dot" data-accent="cyan" style="background:#00e5ff" title="Голубой" aria-label="Голубой" data-i18n-title="accent.cyan"></button>
+					<button type="button" class="accent-dot" data-accent="red" style="background:#ff5555" title="Красный" aria-label="Красный" data-i18n-title="accent.red"></button>
+					<button type="button" class="accent-dot" data-accent="paper" style="background:#e6e6e6" title="Белый" aria-label="Белый" data-i18n-title="accent.paper"></button>
+				</div>
 			</div>
 		</nav>
 	</header>
@@ -54,56 +58,58 @@
 
 		<div class="terminal-body">
 			<p class="prompt-line"><span class="prompt">$</span> cat ~/setup.md</p>
-			<h1>Сетап</h1>
-			<p class="lead">Моё железо.</p>
+			<h1 data-i18n="setup.title">Сетап</h1>
+			<p class="lead" data-i18n="setup.lead">Моё железо.</p>
 
 			<section class="section">
-				<h2>ПК</h2>
+				<h2 data-i18n="setup.pc">ПК</h2>
 				<div class="spec-grid">
-					<div class="spec-item"><div class="spec-label">Процессор</div><div class="spec-value">AMD Ryzen 7 9800X3D</div></div>
-					<div class="spec-item"><div class="spec-label">Видеокарта</div><div class="spec-value">NVIDIA GeForce RTX 5070</div></div>
-					<div class="spec-item"><div class="spec-label">Оперативная память</div><div class="spec-value">32 GB DDR5-6000 CL32 (2×16 GB)</div></div>
-					<div class="spec-item"><div class="spec-label">Накопитель</div><div class="spec-value">Kingston NV3 1 TB NVMe SSD</div></div>
-					<div class="spec-item"><div class="spec-label">Материнская плата</div><div class="spec-value">ASUS PRIME B840M-A</div></div>
-					<div class="spec-item"><div class="spec-label">Охлаждение</div><div class="spec-value">—</div></div>
-					<div class="spec-item"><div class="spec-label">Корпус</div><div class="spec-value">—</div></div>
-					<div class="spec-item"><div class="spec-label">Блок питания</div><div class="spec-value">—</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.cpu">Процессор</div><div class="spec-value">AMD Ryzen 7 9800X3D</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.gpu">Видеокарта</div><div class="spec-value">NVIDIA GeForce RTX 5070</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.ram">Оперативная память</div><div class="spec-value">32 GB DDR5-6000 CL32 (2×16 GB)</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.storage">Накопитель</div><div class="spec-value">Kingston NV3 1 TB NVMe SSD</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.motherboard">Материнская плата</div><div class="spec-value">ASUS PRIME B840M-A</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.cooling">Охлаждение</div><div class="spec-value">—</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.case">Корпус</div><div class="spec-value">—</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.psu">Блок питания</div><div class="spec-value">—</div></div>
 				</div>
 			</section>
 
 			<section class="section">
-				<h2>Периферия</h2>
+				<h2 data-i18n="setup.peripherals">Периферия</h2>
 				<div class="spec-grid">
-					<div class="spec-item"><div class="spec-label">Монитор 1</div><div class="spec-value">LG UltraGear 27GP850P</div></div>
-					<div class="spec-item"><div class="spec-label">Монитор 2</div><div class="spec-value">LG UltraGear 27G610A-B</div></div>
-					<div class="spec-item"><div class="spec-label">Клавиатура 1</div><div class="spec-value">HyperX Alloy Origins Core</div></div>
-					<div class="spec-item"><div class="spec-label">Клавиатура 2</div><div class="spec-value">Razer Huntsman Mini White</div></div>
-					<div class="spec-item"><div class="spec-label">Мышь</div><div class="spec-value">Logitech G Pro X Superlight 2</div></div>
-					<div class="spec-item"><div class="spec-label">Наушники</div><div class="spec-value">Logitech G PRO</div></div>
-					<div class="spec-item"><div class="spec-label">Микрофон</div><div class="spec-value">HyperX QuadCast 2</div></div>
-					<div class="spec-item"><div class="spec-label">Кресло</div><div class="spec-value"><a href="https://jysk.dk/kontor/kontorstole/kontorstol-varpelev-sort-mesh-sort" target="_blank" rel="noopener noreferrer">Jysk VARPELEV (чёрный mesh)</a></div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.monitor1">Монитор 1</div><div class="spec-value">LG UltraGear 27GP850P</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.monitor2">Монитор 2</div><div class="spec-value">LG UltraGear 27G610A-B</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.keyboard1">Клавиатура 1</div><div class="spec-value">HyperX Alloy Origins Core</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.keyboard2">Клавиатура 2</div><div class="spec-value">Razer Huntsman Mini White</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.mouse">Мышь</div><div class="spec-value">Logitech G Pro X Superlight 2</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.headphones">Наушники</div><div class="spec-value">Logitech G PRO</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.microphone">Микрофон</div><div class="spec-value">HyperX QuadCast 2</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.chair">Кресло</div><div class="spec-value"><a href="https://jysk.dk/kontor/kontorstole/kontorstol-varpelev-sort-mesh-sort" target="_blank" rel="noopener noreferrer" data-i18n="spec.chair.value">Jysk VARPELEV (чёрный mesh)</a></div></div>
 				</div>
 			</section>
 
 			<section class="section">
-				<h2>Софт</h2>
+				<h2 data-i18n="setup.software">Софт</h2>
 				<div class="spec-grid">
-					<div class="spec-item"><div class="spec-label">ОС</div><div class="spec-value">Windows 11 Home</div></div>
-					<div class="spec-item"><div class="spec-label">Браузер</div><div class="spec-value">—</div></div>
-					<div class="spec-item"><div class="spec-label">Запись</div><div class="spec-value">—</div></div>
-					<div class="spec-item"><div class="spec-label">Монтаж</div><div class="spec-value">—</div></div>
-					<div class="spec-item"><div class="spec-label">Музыка</div><div class="spec-value">—</div></div>
-					<div class="spec-item"><div class="spec-label">Прочее</div><div class="spec-value">—</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.os">ОС</div><div class="spec-value">Windows 11 Home</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.browser">Браузер</div><div class="spec-value">—</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.recording">Запись</div><div class="spec-value">—</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.editing">Монтаж</div><div class="spec-value">—</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.music">Музыка</div><div class="spec-value">—</div></div>
+					<div class="spec-item"><div class="spec-label" data-i18n="spec.other">Прочее</div><div class="spec-value">—</div></div>
 				</div>
 			</section>
 		</div>
 	</main>
 
 	<footer class="site-footer">
-		<p>© <span id="year">2025</span> GeniusHydra — все системы работают</p>
+		<p>© <span id="year">2025</span> GeniusHydra — <span data-i18n="footer.note">все системы работают</span></p>
 	</footer>
 
 	<script src="config.js"></script>
+	<script src="js/i18n.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/season.js"></script>
 </body>
 </html>

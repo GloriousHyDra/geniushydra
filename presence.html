@@ -3,10 +3,10 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Статус — GeniusHydra</title>
-	<meta name="description" content="Где GeniusHydra сейчас активен." />
-	<meta property="og:title" content="Статус — GeniusHydra" />
-	<meta property="og:description" content="Где GeniusHydra сейчас активен." />
+	<title data-i18n="meta.presence.title">Статус — GeniusHydra</title>
+	<meta name="description" content="Где GeniusHydra сейчас активен." data-i18n-content="meta.presence.desc" />
+	<meta property="og:title" content="Статус — GeniusHydra" data-i18n-content="meta.presence.title" />
+	<meta property="og:description" content="Где GeniusHydra сейчас активен." data-i18n-content="meta.presence.desc" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://geniushydra.com/presence.html" />
 	<meta property="og:image" content="https://geniushydra.com/assets/og-image.png" />
@@ -34,12 +34,16 @@
 				<a href="/gallery.html">~/gallery</a>
 				<a href="/presence.html">~/presence</a>
 			</div>
-			<div class="accent-switcher" role="group" aria-label="Цвет фосфора">
-				<button type="button" class="accent-dot" data-accent="green" style="background:#33ff33" title="Зелёный" aria-label="Зелёный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="amber" style="background:#ffb000" title="Янтарный" aria-label="Янтарный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="cyan" style="background:#00e5ff" title="Голубой" aria-label="Голубой фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="red" style="background:#ff5555" title="Красный" aria-label="Красный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="paper" style="background:#e6e6e6" title="Белый" aria-label="Белый фосфор"></button>
+			<div class="nav-controls">
+				<span class="season-emoji" data-season-emoji hidden></span>
+				<button type="button" class="lang-toggle" data-lang-toggle>EN</button>
+				<div class="accent-switcher" role="group" aria-label="Цвет фосфора" data-i18n-title="accent.group">
+					<button type="button" class="accent-dot" data-accent="green" style="background:#33ff33" title="Зелёный" aria-label="Зелёный" data-i18n-title="accent.green"></button>
+					<button type="button" class="accent-dot" data-accent="amber" style="background:#ffb000" title="Янтарный" aria-label="Янтарный" data-i18n-title="accent.amber"></button>
+					<button type="button" class="accent-dot" data-accent="cyan" style="background:#00e5ff" title="Голубой" aria-label="Голубой" data-i18n-title="accent.cyan"></button>
+					<button type="button" class="accent-dot" data-accent="red" style="background:#ff5555" title="Красный" aria-label="Красный" data-i18n-title="accent.red"></button>
+					<button type="button" class="accent-dot" data-accent="paper" style="background:#e6e6e6" title="Белый" aria-label="Белый" data-i18n-title="accent.paper"></button>
+				</div>
 			</div>
 		</nav>
 	</header>
@@ -54,11 +58,11 @@
 
 		<div class="terminal-body">
 			<p class="prompt-line"><span class="prompt">$</span> cat ~/presence.md</p>
-			<h1>Статус</h1>
-			<p class="lead">Где я сейчас активен.</p>
+			<h1 data-i18n="presence.title">Статус</h1>
+			<p class="lead" data-i18n="presence.lead">Где я сейчас активен.</p>
 
 			<section class="section">
-				<h2>Профили</h2>
+				<h2 data-i18n="presence.profiles">Профили</h2>
 				<div class="presence-grid">
 					<a class="presence-card" href="https://discord.com/users/geniushydra" target="_blank" rel="noopener noreferrer">
 						<span class="pc-tag">[discord]</span>
@@ -90,7 +94,7 @@
 			</section>
 
 			<section class="section">
-				<h2>Сейчас активен</h2>
+				<h2 data-i18n="presence.active">Сейчас активен</h2>
 				<div class="activities" data-discord-activities hidden></div>
 			</section>
 
@@ -99,11 +103,13 @@
 	</main>
 
 	<footer class="site-footer">
-		<p>© <span id="year">2025</span> GeniusHydra — все системы работают</p>
+		<p>© <span id="year">2025</span> GeniusHydra — <span data-i18n="footer.note">все системы работают</span></p>
 	</footer>
 
 	<script src="config.js"></script>
+	<script src="js/i18n.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/season.js"></script>
 	<script src="js/presence.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Страница не найдена — GeniusHydra</title>
+	<title data-i18n="meta.404.title">Страница не найдена — GeniusHydra</title>
 	<meta name="robots" content="noindex" />
 	<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon.png" />
 	<link rel="icon" href="assets/favicon.ico" />
@@ -25,12 +25,16 @@
 				<a href="/gallery.html">~/gallery</a>
 				<a href="/presence.html">~/presence</a>
 			</div>
-			<div class="accent-switcher" role="group" aria-label="Цвет фосфора">
-				<button type="button" class="accent-dot" data-accent="green" style="background:#33ff33" title="Зелёный" aria-label="Зелёный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="amber" style="background:#ffb000" title="Янтарный" aria-label="Янтарный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="cyan" style="background:#00e5ff" title="Голубой" aria-label="Голубой фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="red" style="background:#ff5555" title="Красный" aria-label="Красный фосфор"></button>
-				<button type="button" class="accent-dot" data-accent="paper" style="background:#e6e6e6" title="Белый" aria-label="Белый фосфор"></button>
+			<div class="nav-controls">
+				<span class="season-emoji" data-season-emoji hidden></span>
+				<button type="button" class="lang-toggle" data-lang-toggle>EN</button>
+				<div class="accent-switcher" role="group" aria-label="Цвет фосфора" data-i18n-title="accent.group">
+					<button type="button" class="accent-dot" data-accent="green" style="background:#33ff33" title="Зелёный" aria-label="Зелёный" data-i18n-title="accent.green"></button>
+					<button type="button" class="accent-dot" data-accent="amber" style="background:#ffb000" title="Янтарный" aria-label="Янтарный" data-i18n-title="accent.amber"></button>
+					<button type="button" class="accent-dot" data-accent="cyan" style="background:#00e5ff" title="Голубой" aria-label="Голубой" data-i18n-title="accent.cyan"></button>
+					<button type="button" class="accent-dot" data-accent="red" style="background:#ff5555" title="Красный" aria-label="Красный" data-i18n-title="accent.red"></button>
+					<button type="button" class="accent-dot" data-accent="paper" style="background:#e6e6e6" title="Белый" aria-label="Белый" data-i18n-title="accent.paper"></button>
+				</div>
 			</div>
 		</nav>
 	</header>
@@ -46,16 +50,18 @@
 		<div class="terminal-body">
 			<p class="prompt-line"><span class="prompt">$</span> cd /this-path</p>
 			<div class="error-code">404</div>
-			<p class="error-msg">bash: cd: /this-path: Нет такого файла или каталога</p>
+			<p class="error-msg" data-i18n="error.msg">bash: cd: /this-path: Нет такого файла или каталога</p>
 			<a class="btn" href="/">cd ~ <span class="cursor">█</span></a>
 		</div>
 	</main>
 
 	<footer class="site-footer">
-		<p>© <span id="year">2025</span> GeniusHydra — все системы работают</p>
+		<p>© <span id="year">2025</span> GeniusHydra — <span data-i18n="footer.note">все системы работают</span></p>
 	</footer>
 
 	<script src="config.js"></script>
+	<script src="js/i18n.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/season.js"></script>
 </body>
 </html>
