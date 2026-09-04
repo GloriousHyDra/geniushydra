@@ -16,5 +16,8 @@ window.SITE_CONFIG = {
 
 	// Код аналитики GoatCounter (https://www.goatcounter.com).
 	// Оставь '' чтобы отключить. Указывается только код, например 'geniushydra'.
-	goatcounter: ''
+	goatcounter: '',
+
+	// URL прокси-воркера Steam (см. инструкцию ниже). Оставь '' чтобы скрыть секцию Steam.
+	steamProxy: ''
 };

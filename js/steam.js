@@ -1,4 +1,4 @@
-/* GeniusHydra — Steam recently played (via /api/steam-recent proxy) */
+/* GeniusHydra — Steam recently played (via a Cloudflare Worker proxy) */
 (function () {
 	'use strict';
 
@@ -6,10 +6,17 @@
 	if (!containers.length) return;
 
 	var t = window.__t || function (k) { return k; };
+	var cfg = window.SITE_CONFIG || {};
+	var proxy = (cfg.steamProxy || '').replace(/\/+$/, '');
 	var STEAM_ID = '76561198995484465';
 
+	if (!proxy) {
+		containers.forEach(function (el) { el.hidden = true; });
+		return;
+	}
+
 	function render() {
-		fetch('/api/steam-recent?steamid=' + STEAM_ID + '&count=5')
+		fetch(proxy + '/?steamid=' + STEAM_ID + '&count=5')
 			.then(function (res) { return res.json(); })
 			.then(function (data) {
 				if (data && data.error) throw new Error(data.error);
