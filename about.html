@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru" data-accent="violet">
+<html lang="ru" data-accent="green">
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,72 +18,76 @@
 	<link rel="icon" href="assets/favicon.ico" />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
 	<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-	<div class="aurora" aria-hidden="true">
-		<div class="blob blob-1"></div>
-		<div class="blob blob-2"></div>
-		<div class="blob blob-3"></div>
-		<div class="blob blob-4"></div>
-		<div class="vignette"></div>
-	</div>
+	<div class="crt-overlay" aria-hidden="true"></div>
 
 	<header class="site-header">
 		<nav class="nav">
-			<a class="nav-brand" href="/">GeniusHydra</a>
+			<a class="nav-brand" href="/">geniushydra@web:~<span class="cursor">█</span></a>
 			<div class="nav-links">
-				<a href="/">Главная</a>
-				<a href="/about.html">Обо мне</a>
-				<a href="/setup.html">Сетап</a>
-				<a href="/gallery.html">Галерея</a>
-				<a href="/presence.html">Статус</a>
+				<a href="/">~/</a>
+				<a href="/about.html">~/about</a>
+				<a href="/setup.html">~/setup</a>
+				<a href="/gallery.html">~/gallery</a>
+				<a href="/presence.html">~/presence</a>
 			</div>
-			<div class="accent-switcher" role="group" aria-label="Цвет акцента">
-				<button type="button" class="accent-dot" data-accent="violet" style="background:linear-gradient(135deg,#7c3aed,#db2777)" title="Фиолетовый" aria-label="Фиолетовая тема"></button>
-				<button type="button" class="accent-dot" data-accent="ocean" style="background:linear-gradient(135deg,#0ea5e9,#2563eb)" title="Океан" aria-label="Океанская тема"></button>
-				<button type="button" class="accent-dot" data-accent="ember" style="background:linear-gradient(135deg,#f97316,#ef4444)" title="Пламя" aria-label="Огненная тема"></button>
-				<button type="button" class="accent-dot" data-accent="mint" style="background:linear-gradient(135deg,#10b981,#06b6d4)" title="Мята" aria-label="Мятная тема"></button>
-				<button type="button" class="accent-dot" data-accent="rose" style="background:linear-gradient(135deg,#f43f5e,#a855f7)" title="Роза" aria-label="Розовая тема"></button>
+			<div class="accent-switcher" role="group" aria-label="Цвет фосфора">
+				<button type="button" class="accent-dot" data-accent="green" style="background:#33ff33" title="Зелёный" aria-label="Зелёный фосфор"></button>
+				<button type="button" class="accent-dot" data-accent="amber" style="background:#ffb000" title="Янтарный" aria-label="Янтарный фосфор"></button>
+				<button type="button" class="accent-dot" data-accent="cyan" style="background:#00e5ff" title="Голубой" aria-label="Голубой фосфор"></button>
+				<button type="button" class="accent-dot" data-accent="red" style="background:#ff5555" title="Красный" aria-label="Красный фосфор"></button>
+				<button type="button" class="accent-dot" data-accent="paper" style="background:#e6e6e6" title="Белый" aria-label="Белый фосфор"></button>
 			</div>
 		</nav>
 	</header>
 
-	<main class="page">
-		<h1>Обо мне</h1>
-		<p class="lead">Немного обо мне.</p>
+	<main class="terminal reveal">
+		<div class="terminal-bar">
+			<span class="t-dot t-red"></span>
+			<span class="t-dot t-yellow"></span>
+			<span class="t-dot t-green"></span>
+			<span class="terminal-title">geniushydra@web: ~/about</span>
+		</div>
 
-		<section class="section">
-			<h2>Кто я</h2>
-			<div class="card">
-				<p class="card-sub">Привет, я GeniusHydra — обитаю в Discord, Telegram и Steam. [Замени это на короткую биографию: кто ты, чем занимаешься, что тебе интересно.]</p>
-			</div>
-		</section>
+		<div class="terminal-body">
+			<p class="prompt-line"><span class="prompt">$</span> cat ~/about.md</p>
+			<h1>Обо мне</h1>
+			<p class="lead">Немного обо мне.</p>
 
-		<section class="section">
-			<h2>Чем увлекаюсь</h2>
-			<div class="card">
-				<div class="card-title">Игры</div>
-				<p class="card-sub">[Во что играешь, любимые жанры, текущее увлечение.]</p>
-			</div>
-			<div class="card">
-				<div class="card-title">Прочее</div>
-				<p class="card-sub">[Что-нибудь ещё — музыка, стримы, проекты.]</p>
-			</div>
-		</section>
+			<section class="section">
+				<h2>Кто я</h2>
+				<div class="card">
+					<p class="card-sub">Привет, я GeniusHydra — обитаю в Discord, Telegram и Steam. [Замени это на короткую биографию: кто ты, чем занимаешься, что тебе интересно.]</p>
+				</div>
+			</section>
 
-		<section class="section">
-			<h2>Связаться со мной</h2>
-			<div class="card" style="text-align:center">
-				<p class="card-sub" style="margin-bottom:1rem">Быстрее всего меня найти в Discord или Telegram.</p>
-				<a class="btn" href="/presence.html">Где я активен →</a>
-			</div>
-		</section>
+			<section class="section">
+				<h2>Чем увлекаюсь</h2>
+				<div class="card">
+					<div class="card-title">Игры</div>
+					<p class="card-sub">[Во что играешь, любимые жанры, текущее увлечение.]</p>
+				</div>
+				<div class="card">
+					<div class="card-title">Прочее</div>
+					<p class="card-sub">[Что-нибудь ещё — музыка, стримы, проекты.]</p>
+				</div>
+			</section>
+
+			<section class="section">
+				<h2>Связаться со мной</h2>
+				<div class="card">
+					<p class="card-sub" style="margin-bottom:1rem">Быстрее всего меня найти в Discord или Telegram.</p>
+					<a class="btn" href="/presence.html">cat ~/presence →</a>
+				</div>
+			</section>
+		</div>
 	</main>
 
 	<footer class="site-footer">
-		<p>&copy; <span id="year">2025</span> GeniusHydra</p>
+		<p>© <span id="year">2025</span> GeniusHydra — все системы работают</p>
 	</footer>
 
 	<script src="config.js"></script>

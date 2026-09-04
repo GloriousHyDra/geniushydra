@@ -36,7 +36,7 @@
 	/* ------------------------------------------------------------------
 	 * 2. Accent theme switcher (persisted in localStorage)
 	 * ------------------------------------------------------------------ */
-	var ACCENT_KEY = 'gh-accent';
+	var ACCENT_KEY = 'gh-accent-v2';
 	var dots = Array.from(document.querySelectorAll('.accent-dot'));
 
 	function applyAccent(accent) {
@@ -47,8 +47,8 @@
 		try { localStorage.setItem(ACCENT_KEY, accent); } catch (e) { /* ignore */ }
 	}
 
-	var saved = 'violet';
-	try { saved = localStorage.getItem(ACCENT_KEY) || 'violet'; } catch (e) { /* ignore */ }
+	var saved = 'green';
+	try { saved = localStorage.getItem(ACCENT_KEY) || 'green'; } catch (e) { /* ignore */ }
 	applyAccent(saved);
 
 	dots.forEach(function (dot) {
@@ -60,10 +60,10 @@
 	/* ------------------------------------------------------------------
 	 * 3. Highlight the current page in the nav
 	 * ------------------------------------------------------------------ */
-	var here = location.pathname.split('/').pop() || 'index.html';
+	var here = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/, '');
 	document.querySelectorAll('.nav-links a').forEach(function (a) {
 		var href = a.getAttribute('href');
-		var page = href === '/' ? 'index.html' : href.replace(/^\//, '');
+		var page = (href === '/' ? 'index.html' : href.replace(/^\//, '')).replace(/\.html$/, '');
 		if (page === here) a.classList.add('active');
 	});
 

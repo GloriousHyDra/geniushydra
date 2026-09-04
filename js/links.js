@@ -1,4 +1,4 @@
-/* GeniusHydra — render the link cards from links.json */
+/* GeniusHydra — рендер ссылок из links.json */
 (function () {
 	'use strict';
 
@@ -15,40 +15,50 @@
 
 			links.forEach(function (link, index) {
 				var a = document.createElement('a');
-				a.className = 'link-card reveal';
+				a.className = 'link-row reveal';
 				a.href = link.url;
 				a.target = '_blank';
 				a.rel = 'noopener noreferrer';
-				a.style.setProperty('--accent', link.accent);
 				a.style.setProperty('--i', index);
 
-				// Static template (structure only — text is set safely below).
-				a.innerHTML =
-					'<span class="link-icon img-box">' +
-						'<img alt="" loading="lazy" />' +
-						'<svg class="img-fallback" viewBox="0 0 24 24"><use href="#icon-' + link.platform + '" /></svg>' +
-						'<span class="platform-badge platform-' + link.platform + '" aria-hidden="true">' +
-							'<svg viewBox="0 0 24 24"><use href="#icon-' + link.platform + '" /></svg>' +
-						'</span>' +
-					'</span>' +
-					'<span class="link-text">' +
-						'<span class="link-name"></span>' +
-						'<span class="link-subtitle"></span>' +
-					'</span>' +
-					'<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>';
+				var idx = document.createElement('span');
+				idx.className = 'link-index';
+				idx.textContent = String(index + 1).padStart(2, '0');
 
-				a.querySelector('.link-icon img').src = link.icon;
-				a.querySelector('.link-name').textContent = link.name;
-				if (link.subtitle) a.querySelector('.link-subtitle').textContent = link.subtitle;
+				var main = document.createElement('span');
+				main.className = 'link-main';
 
+				var name = document.createElement('span');
+				name.className = 'link-name';
+				name.textContent = link.name;
+				main.appendChild(name);
+
+				if (link.subtitle) {
+					var sub = document.createElement('span');
+					sub.className = 'link-sub';
+					sub.textContent = link.subtitle;
+					main.appendChild(sub);
+				}
+
+				var tag = document.createElement('span');
+				tag.className = 'link-tag';
+				tag.textContent = '[' + link.platform + ']';
+
+				var arrow = document.createElement('span');
+				arrow.className = 'link-arrow';
+				arrow.textContent = '↗';
+
+				a.appendChild(idx);
+				a.appendChild(main);
+				a.appendChild(tag);
+				a.appendChild(arrow);
 				frag.appendChild(a);
 			});
 
 			container.appendChild(frag);
-			if (window.__markFailedImages) window.__markFailedImages(container);
 		})
 		.catch(function (err) {
 			container.innerHTML =
-				'<p style="color:#9aa0b4;font-size:0.9rem">Could not load links (' + err.message + ').</p>';
+				'<p style="color:var(--muted);font-size:0.85rem">не удалось загрузить links.json (' + err.message + ')</p>';
 		});
 })();

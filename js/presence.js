@@ -22,13 +22,13 @@
 
 	function activityInfo(a) {
 		switch (a.type) {
-			case 0: return { icon: '🎮', label: 'Играет в ' + (a.name || 'игру'), detail: a.details || '' };
-			case 1: return { icon: '📺', label: 'Стримит ' + (a.name || a.details || ''), detail: a.state || '' };
-			case 2: return { icon: '🎧', label: 'Слушает — ' + (a.details || a.name || 'музыку'), detail: a.state || '' };
-			case 3: return { icon: '🍿', label: 'Смотрит ' + (a.name || ''), detail: '' };
-			case 4: return { icon: (a.emoji && a.emoji.name) ? a.emoji.name : '💬', label: a.state || 'Статус', detail: '' };
-			case 5: return { icon: '🏆', label: 'Соревнуется в ' + (a.name || ''), detail: '' };
-			default: return { icon: '', label: a.name || a.state || '', detail: '' };
+			case 0: return { tag: 'playing', full: 'Играет в ' + (a.name || 'игру'), label: a.name || '', detail: a.details || '' };
+			case 1: return { tag: 'streaming', full: 'Стримит ' + (a.name || a.details || ''), label: a.name || a.details || '', detail: a.state || '' };
+			case 2: return { tag: 'listening', full: 'Слушает — ' + (a.details || a.name || 'музыку'), label: a.details || a.name || '', detail: a.state || '' };
+			case 3: return { tag: 'watching', full: 'Смотрит ' + (a.name || ''), label: a.name || '', detail: '' };
+			case 4: return { tag: 'status', full: a.state || 'Статус', label: a.state || '', detail: '' };
+			case 5: return { tag: 'competing', full: 'Соревнуется в ' + (a.name || ''), label: a.name || '', detail: '' };
+			default: return { tag: '', full: a.name || a.state || '', label: a.name || a.state || '', detail: '' };
 		}
 	}
 
@@ -49,11 +49,13 @@
 				art.onerror = function () { art.remove(); };
 				art.src = artUrl;
 				item.appendChild(art);
-			} else {
-				var icon = document.createElement('span');
-				icon.className = 'act-icon';
-				icon.textContent = info.icon;
-				item.appendChild(icon);
+			}
+
+			if (info.tag) {
+				var tag = document.createElement('span');
+				tag.className = 'act-tag';
+				tag.textContent = '[' + info.tag + ']';
+				item.appendChild(tag);
 			}
 
 			var text = document.createElement('span');
@@ -114,7 +116,7 @@
 			var primary = custom || game || activities[0];
 
 			var label = username;
-			if (primary) label = activityInfo(primary).label;
+			if (primary) label = activityInfo(primary).full;
 
 			var suffix = state === 'online' ? '' : ' · ' + STATUS_LABEL[state];
 			statusEls.forEach(function (el) { setStatus(el, state, label + suffix); });
